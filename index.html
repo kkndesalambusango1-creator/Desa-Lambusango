@@ -1,0 +1,2347 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desa Lambusango - Website Resmi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        /* TEMA v3 — Biru Samudra Luxe: remap palet biru laut situs-wide */
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        green: {
+                            50: '#eef7ff',
+                            100: '#d9edff',
+                            200: '#bce0fe',
+                            300: '#8ccbfd',
+                            400: '#55acf8',
+                            500: '#2b8fe8',
+                            600: '#1670cf',
+                            700: '#125aa8',
+                            800: '#124b88',
+                            900: '#103c6c',
+                            950: '#0a2547'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .hero-bg {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(165deg, rgba(4,19,34,0.78) 0%, rgba(10,42,72,0.46) 45%, rgba(4,19,34,0.68) 100%), url('https://z-cdn-media.chatglm.cn/files/317d277c-55a8-44b0-8e97-6654f7b239f0.png?auth_key=1892759946-70b103ad24094eb8b050f42d003f7054-0-597ac9f672e0fb6089d8468f0f9a9b0a');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .hero-bg > .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .fade-in {
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .scroll-smooth {
+            scroll-behavior: smooth;
+        }
+
+        .nav-scrolled {
+            background-color: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .logo-nav {
+            height: 40px;
+            width: auto;
+        }
+
+        .logo-footer {
+            height: 50px;
+            width: auto;
+        }
+
+        .logo-hero {
+            height: 120px;
+            width: auto;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+        }
+
+        /* Hero typography - rapikan tulisan selamat datang */
+        .hero-title {
+            margin-bottom: 0;
+        }
+
+        .hero-greeting {
+            display: block;
+            font-size: clamp(1rem, 2.5vw, 1.5rem);
+            font-weight: 300;
+            letter-spacing: 0.35em;
+            text-indent: 0.35em;
+            text-transform: uppercase;
+            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.55);
+            margin-bottom: 1rem;
+        }
+
+        .hero-village {
+            display: block;
+            font-size: clamp(2.75rem, 8vw, 5.25rem);
+            font-weight: 800;
+            line-height: 1.08;
+            letter-spacing: -0.01em;
+            text-shadow: 0 6px 24px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.875rem;
+            max-width: 420px;
+            margin: 1.5rem auto;
+        }
+
+        .hero-divider::before,
+        .hero-divider::after {
+            content: '';
+            flex: 1;
+            height: 2px;
+            border-radius: 2px;
+        }
+
+        .hero-divider::before {
+            background: linear-gradient(90deg, transparent, rgba(140, 203, 253, 0.9));
+        }
+
+        .hero-divider::after {
+            background: linear-gradient(90deg, rgba(140, 203, 253, 0.9), transparent);
+        }
+
+        .hero-divider i {
+            color: #8ccbfd;
+            font-size: 1rem;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        .hero-subtitle {
+            font-weight: 300;
+            line-height: 1.65;
+            color: rgba(255, 255, 255, 0.94);
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.55);
+        }
+
+        .hero-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1.25rem;
+            border-radius: 9999px;
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(6px);
+            font-size: 0.875rem;
+            letter-spacing: 0.04em;
+        }
+
+        .hero-chip i {
+            color: #8ccbfd;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .profil-card {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border: 1px solid rgba(22, 112, 207, 0.1);
+        }
+
+        .profil-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #1670cf, #125aa8);
+        }
+
+        .profil-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .profil-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(22, 112, 207, 0.1) 0%, rgba(18, 90, 168, 0.2) 100%);
+            transition: all 0.3s ease;
+        }
+
+        .profil-card:hover .profil-icon {
+            transform: scale(1.1);
+            background: linear-gradient(135deg, rgba(22, 112, 207, 0.2) 0%, rgba(18, 90, 168, 0.3) 100%);
+        }
+
+        .kegiatan-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 0.75rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .kegiatan-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px rgba(0,0,0,0.1);
+        }
+
+        .kegiatan-img {
+            height: 220px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .kegiatan-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .kegiatan-card:hover .kegiatan-img img {
+            transform: scale(1.05);
+        }
+
+        .kegiatan-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);
+            color: white;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .kegiatan-card:hover .kegiatan-overlay {
+            transform: translateY(0);
+        }
+
+        .kegiatan-category {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(22, 112, 207, 0.9);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            backdrop-filter: blur(4px);
+        }
+
+        .potensi-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 0.75rem;
+            transition: all 0.3s ease;
+            background: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            height: 100%;
+        }
+
+        .potensi-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px rgba(0,0,0,0.1);
+        }
+
+        .potensi-icon-wrapper {
+            width: 90px;
+            height: 90px;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(22, 112, 207, 0.1) 0%, rgba(18, 90, 168, 0.2) 100%);
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .potensi-card:hover .potensi-icon-wrapper {
+            transform: scale(1.1) rotate(5deg);
+            background: linear-gradient(135deg, rgba(22, 112, 207, 0.2) 0%, rgba(18, 90, 168, 0.3) 100%);
+        }
+
+        .potensi-icon {
+            font-size: 2.5rem;
+            color: #1670cf;
+            transition: all 0.3s ease;
+        }
+
+        .potensi-card:hover .potensi-icon {
+            transform: scale(1.1);
+        }
+
+        .potensi-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(22, 112, 207, 0.1);
+            color: #1670cf;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .section-gradient-profil {
+            background: linear-gradient(135deg, #e9f4fe 0%, #d2e5f9 100%);
+        }
+
+        .section-gradient-potensi {
+            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+        }
+
+        .potensi-img {
+            height: 220px;
+            overflow: hidden;
+            position: relative;
+            border-top-left-radius: 0.75rem;
+            border-top-right-radius: 0.75rem;
+            cursor: pointer;
+        }
+
+        .potensi-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .potensi-card:hover .potensi-img img {
+            transform: scale(1.05);
+        }
+
+        .keterangan-pertanian {
+            font-size: 0.75rem;
+            color: #6b7280;
+            font-style: italic;
+            margin-top: 0.5rem;
+            line-height: 1.4;
+        }
+
+        .map-section {
+            background-color: #f9fafb;
+        }
+
+        .map-info-panel {
+            background-color: #f3f4f6;
+        }
+
+        .map-frame {
+            min-height: 400px;
+            position: relative;
+        }
+
+        /* Gallery Styles */
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            height: 250px;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px rgba(0,0,0,0.1);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);
+            color: white;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+
+        .gallery-zoom {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(22, 112, 207, 0.9);
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-zoom {
+            opacity: 1;
+        }
+
+        /* Lightbox Styles */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .lightbox.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            transform: scale(0.8);
+            transition: transform 0.3s ease;
+        }
+
+        .lightbox.active .lightbox-content {
+            transform: scale(1);
+        }
+
+        .lightbox img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+            z-index: 1001;
+            transition: color 0.3s ease;
+        }
+
+        .lightbox-close:hover {
+            color: #1670cf;
+        }
+
+        .lightbox-caption {
+            position: absolute;
+            bottom: 30px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            color: white;
+            font-size: 18px;
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+
+        .about-image {
+            cursor: pointer;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .about-image:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .zoom-indicator {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .about-image:hover .zoom-indicator,
+        .kegiatan-img:hover .zoom-indicator,
+        .potensi-img:hover .zoom-indicator,
+        .moment-photo:hover .zoom-indicator {
+            opacity: 1;
+        }
+
+        /* KKN Member Card Styles */
+        .section-gradient-kkn {
+            background: linear-gradient(135deg, #e7f3fc 0%, #cde5f5 100%);
+        }
+
+        .kkn-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        .kkn-card {
+            background: #ffffff;
+            border-radius: 1rem;
+            padding: 2rem 1rem;
+            text-align: center;
+            flex: 1 1 220px;
+            max-width: 270px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border: 1px solid rgba(22, 112, 207, 0.12);
+            transition: all 0.3s ease;
+        }
+
+        .kkn-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 30px rgba(0,0,0,0.12);
+        }
+
+        .kkn-avatar-wrap {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 1rem;
+            border: 4px solid #1670cf;
+            box-shadow: 0 0 0 4px rgba(22, 112, 207, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .kkn-avatar {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 85%;
+            transform-origin: center 30%;
+            transition: transform 0.4s ease;
+            filter: contrast(1.05) saturate(1.07);
+        }
+
+        .kkn-card:hover .kkn-avatar {
+            transform: scale(1.08);
+        }
+
+        /* Zoom khusus untuk foto full-body agar wajah terlihat jelas */
+        .kkn-avatar-zoom {
+            transform: scale(1.5);
+            transform-origin: center 30%;
+        }
+
+        .kkn-card:hover .kkn-avatar-zoom {
+            transform: scale(1.62);
+        }
+
+        .kkn-card:hover .kkn-avatar-wrap {
+            box-shadow: 0 0 0 6px rgba(22, 112, 207, 0.25);
+        }
+
+        .kkn-name {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 0.35rem;
+        }
+
+        .kkn-prodi {
+            font-size: 0.8rem;
+            color: #125aa8;
+            font-weight: 500;
+            line-height: 1.4;
+            background: rgba(22, 112, 207, 0.08);
+            display: inline-block;
+            padding: 0.25rem 0.85rem;
+            border-radius: 9999px;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        @media (max-width: 480px) {
+            .kkn-grid { gap: 1rem; }
+            .kkn-avatar-wrap { width: 110px; height: 110px; }
+            .kkn-card { padding: 1.25rem 0.75rem; }
+            .kkn-name { font-size: 0.95rem; }
+            .kkn-prodi { font-size: 0.7rem; }
+        }
+
+        /* Moment of KKN (dokumentasi foto) */
+        .moment-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .moment-photo {
+            position: relative;
+            border-radius: 1rem;
+            overflow: hidden;
+            aspect-ratio: 4 / 3;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .moment-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .moment-photo:hover img {
+            transform: scale(1.06);
+        }
+
+        .moment-photo:hover {
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+        }
+
+        /* Sisa 1 foto di baris terakhir (desktop) -> tengahkan di kolom tengah */
+        @media (min-width: 769px) {
+            .moment-grid .moment-photo:last-child:nth-child(3n+1) {
+                grid-column: 2;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .moment-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+        }
+
+        @media (max-width: 480px) {
+            .moment-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ===== Corak geometris latar belakang ===== */
+        :root {
+            --corak-geo: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cg fill='none' stroke='%231670cf' stroke-width='2' opacity='.08'%3E%3Ccircle cx='24' cy='26' r='9'/%3E%3Cpath d='M118 12l12 20h-24z'/%3E%3Cpath d='M52 70h16M60 62v16'/%3E%3Crect x='104' y='92' width='16' height='16' rx='2' transform='rotate(18 112 100)'/%3E%3C/g%3E%3Cg fill='%231670cf' opacity='.06'%3E%3Ccircle cx='84' cy='34' r='5'/%3E%3Cpath d='M20 108l10 17H10z'/%3E%3Crect x='138' y='46' width='12' height='12' rx='2' transform='rotate(-12 144 52)'/%3E%3Ccircle cx='60' cy='140' r='7'/%3E%3Cpath d='M104 132l9 15h-18z'/%3E%3C/g%3E%3Cg fill='none' stroke='%23125aa8' stroke-width='2' opacity='.07'%3E%3Cpath d='M96 66h14M103 59v14'/%3E%3Ccircle cx='148' cy='146' r='8'/%3E%3C/g%3E%3C/svg%3E");
+            --corak-geo-putih: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cg fill='none' stroke='white' stroke-width='2' opacity='.05'%3E%3Ccircle cx='24' cy='26' r='9'/%3E%3Cpath d='M118 12l12 20h-24z'/%3E%3Cpath d='M52 70h16M60 62v16'/%3E%3Crect x='104' y='92' width='16' height='16' rx='2' transform='rotate(18 112 100)'/%3E%3C/g%3E%3Cg fill='white' opacity='.04'%3E%3Ccircle cx='84' cy='34' r='5'/%3E%3Cpath d='M20 108l10 17H10z'/%3E%3Crect x='138' y='46' width='12' height='12' rx='2' transform='rotate(-12 144 52)'/%3E%3Ccircle cx='60' cy='140' r='7'/%3E%3Cpath d='M104 132l9 15h-18z'/%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        section.bg-white,
+        section.bg-gray-50 {
+            background-image: var(--corak-geo);
+        }
+
+        section.section-gradient-profil {
+            background-image: var(--corak-geo), linear-gradient(135deg, #e9f4fe 0%, #d2e5f9 100%);
+        }
+
+        section.section-gradient-potensi {
+            background-image: var(--corak-geo), linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+        }
+
+        section.section-gradient-kkn {
+            background-image: var(--corak-geo), linear-gradient(135deg, #e7f3fc 0%, #cde5f5 100%);
+        }
+
+        footer.bg-gray-800 {
+            background-image: var(--corak-geo-putih);
+        }
+
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+            .hero-bg {
+                background-attachment: scroll;
+            }
+
+            .hero-greeting {
+                letter-spacing: 0.22em;
+                text-indent: 0.22em;
+            }
+
+            .hero-village {
+                font-size: clamp(2.25rem, 9vw, 3.5rem);
+            }
+
+            .hero-chip {
+                font-size: 0.75rem;
+                padding: 0.4rem 1rem;
+            }
+
+            .hero-bg p {
+                font-size: 1.1rem;
+                padding: 0 1rem;
+            }
+
+            .hero-bg .space-x-4 {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .hero-bg .space-x-4 a {
+                width: 80%;
+                margin: 0 auto;
+            }
+
+            .logo-hero {
+                height: 80px;
+            }
+
+            section {
+                padding: 3rem 0;
+            }
+
+            .section h2 {
+                font-size: 1.8rem;
+                margin-bottom: 1rem;
+            }
+
+            .section p {
+                font-size: 0.9rem;
+                padding: 0 1rem;
+            }
+
+            .kegiatan-img {
+                height: 180px;
+            }
+
+            .potensi-img {
+                height: 180px;
+            }
+
+            .profil-card {
+                padding: 1.5rem !important;
+                margin-bottom: 1.5rem;
+            }
+
+            .kegiatan-card {
+                margin-bottom: 1.5rem;
+            }
+
+            .potensi-card {
+                margin-bottom: 1.5rem;
+            }
+
+            .kegiatan-card .p-6 {
+                padding: 1rem !important;
+            }
+
+            .potensi-card .p-6 {
+                padding: 1rem !important;
+            }
+
+            .kegiatan-card h3 {
+                font-size: 1.1rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .kegiatan-card p {
+                font-size: 0.85rem;
+                line-height: 1.4;
+            }
+
+            .potensi-card h3 {
+                font-size: 1rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .potensi-card p {
+                font-size: 0.85rem;
+                line-height: 1.4;
+            }
+
+            .keterangan-pertanian {
+                font-size: 0.7rem;
+            }
+
+            .grid-cols-3 {
+                grid-template-columns: 1fr;
+            }
+
+            .md\:grid-cols-2 {
+                grid-template-columns: 1fr;
+            }
+
+            .lg\:grid-cols-4 {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-item {
+                height: 200px;
+            }
+
+            .map-info-panel {
+                padding: 1rem !important;
+            }
+
+            .map-info-panel h3 {
+                font-size: 1.1rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .map-info-panel h4 {
+                font-size: 0.85rem;
+                margin-bottom: 0.25rem;
+            }
+
+            .map-info-panel p, .map-info-panel li {
+                font-size: 0.8rem;
+                line-height: 1.3;
+            }
+
+            .map-frame {
+                height: 300px;
+            }
+
+            .map-info-overlay {
+                max-width: 200px;
+                padding: 0.5rem !important;
+            }
+
+            .map-info-overlay h4 {
+                font-size: 0.9rem;
+                margin-bottom: 0.25rem;
+            }
+
+            .map-info-overlay p {
+                font-size: 0.7rem;
+            }
+
+            footer {
+                padding: 2rem 0;
+            }
+
+            footer .grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            footer h4 {
+                font-size: 1rem;
+                margin-bottom: 0.5rem;
+            }
+
+            footer ul {
+                font-size: 0.85rem;
+            }
+
+            footer p {
+                font-size: 0.8rem;
+            }
+
+            .logo-footer {
+                height: 40px;
+            }
+
+            /* Mobile menu improvements */
+            #mobile-menu {
+                padding: 0.5rem 0;
+            }
+
+            #mobile-menu a {
+                padding: 0.5rem 1rem;
+                font-size: 0.95rem;
+            }
+
+            /* Button improvements */
+            .bg-green-600 {
+                padding: 0.75rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            /* Stats cards */
+            .grid-cols-3 .bg-white {
+                padding: 1rem !important;
+            }
+
+            .grid-cols-3 i {
+                font-size: 1.5rem !important;
+            }
+
+            .grid-cols-3 h4 {
+                font-size: 1rem;
+            }
+
+            .grid-cols-3 p {
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-greeting {
+                font-size: 0.85rem;
+                letter-spacing: 0.18em;
+                text-indent: 0.18em;
+            }
+
+            .hero-village {
+                font-size: 2.1rem;
+            }
+
+            .hero-bg p {
+                font-size: 1rem;
+            }
+
+            .hero-bg .space-x-4 a {
+                width: 90%;
+                padding: 0.75rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            section {
+                padding: 2rem 0;
+            }
+
+            .section h2 {
+                font-size: 1.6rem;
+            }
+
+            .kegiatan-img {
+                height: 160px;
+            }
+
+            .potensi-img {
+                height: 160px;
+            }
+
+            .profil-card {
+                padding: 1rem !important;
+            }
+
+            .profil-icon {
+                width: 60px;
+                height: 60px;
+                margin-bottom: 1rem;
+            }
+
+            .profil-icon i {
+                font-size: 1.8rem !important;
+            }
+
+            .profil-card h3 {
+                font-size: 1rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .profil-card p, .profil-card li {
+                font-size: 0.8rem;
+                line-height: 1.3;
+            }
+
+            .kegiatan-card .p-6 {
+                padding: 0.75rem !important;
+            }
+
+            .potensi-card .p-6 {
+                padding: 0.75rem !important;
+            }
+
+            .kegiatan-card h3 {
+                font-size: 1rem;
+            }
+
+            .potensi-card h3 {
+                font-size: 0.9rem;
+            }
+
+            .kegiatan-card p {
+                font-size: 0.8rem;
+            }
+
+            .potensi-card p {
+                font-size: 0.8rem;
+            }
+
+            .keterangan-pertanian {
+                font-size: 0.65rem;
+            }
+
+            .gallery-item {
+                height: 160px;
+            }
+
+            .map-frame {
+                height: 250px;
+            }
+
+            .map-info-panel {
+                padding: 0.75rem !important;
+            }
+
+            .map-info-panel h3 {
+                font-size: 1rem;
+            }
+
+            .map-info-panel h4 {
+                font-size: 0.8rem;
+            }
+
+            .map-info-panel p, .map-info-panel li {
+                font-size: 0.75rem;
+            }
+
+            footer {
+                padding: 1.5rem 0;
+            }
+
+            footer h4 {
+                font-size: 0.9rem;
+            }
+
+            footer ul {
+                font-size: 0.8rem;
+            }
+
+            footer p {
+                font-size: 0.75rem;
+            }
+
+            .logo-footer {
+                height: 35px;
+            }
+
+            /* Stats cards */
+            .grid-cols-3 .bg-white {
+                padding: 0.75rem !important;
+            }
+
+            .grid-cols-3 i {
+                font-size: 1.25rem !important;
+            }
+
+            .grid-cols-3 h4 {
+                font-size: 0.9rem;
+            }
+
+            .grid-cols-3 p {
+                font-size: 0.75rem;
+            }
+        }
+        /* ==========================================================
+           TEMA v3 — Biru Samudra & Emas Senja
+           biru laut pekat · emas senja · biru es lembut
+           ========================================================== */
+        :root {
+            --emas: #e2ab45;
+            --emas-terang: #f5cf72;
+            --biru-es: #edf4fb;
+            --biru-es-putih: #fbfdff;
+        }
+
+        /* Tipografi: Plus Jakarta Sans untuk seluruh judul */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
+        }
+
+        /* Garis aksen emas-hijau di bawah judul section */
+        section h2 {
+            position: relative;
+            padding-bottom: 1.1rem;
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 68px;
+            height: 4px;
+            border-radius: 999px;
+            background: linear-gradient(90deg, var(--emas), #1670cf);
+        }
+
+        /* Latar section bernuansa samudra */
+        section.bg-gray-50 { background-color: var(--biru-es) !important; }
+        section.bg-white { background-color: var(--biru-es-putih) !important; }
+
+        section.section-gradient-profil {
+            background-image: var(--corak-geo), linear-gradient(135deg, #e9f4fe 0%, #d2e5f9 100%);
+        }
+
+        section.section-gradient-potensi {
+            background-image: var(--corak-geo), linear-gradient(135deg, #eef3fd 0%, #d9e4f8 100%);
+        }
+
+        section.section-gradient-kkn {
+            background-image: var(--corak-geo), linear-gradient(135deg, #e7f3fc 0%, #cde5f5 100%);
+        }
+
+        /* Blob cahaya mengambang pada hero */
+        .hero-bg::before,
+        .hero-bg::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(70px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .hero-bg::before {
+            width: 420px;
+            height: 420px;
+            background: rgba(85, 172, 248, 0.30);
+            top: -120px;
+            right: -100px;
+            animation: apung 9s ease-in-out infinite;
+        }
+
+        .hero-bg::after {
+            width: 360px;
+            height: 360px;
+            background: rgba(226, 171, 69, 0.22);
+            bottom: -100px;
+            left: -90px;
+            animation: apung 11s ease-in-out infinite reverse;
+        }
+
+        @keyframes apung {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(18px, -26px) scale(1.08); }
+        }
+
+        /* Judul desa: teks gradasi putih → biru muda */
+        .hero-village {
+            background: linear-gradient(180deg, #ffffff 30%, #a8d4f8 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: none;
+            filter: drop-shadow(0 8px 26px rgba(0, 0, 0, 0.45));
+        }
+
+        /* Aksen emas pada elemen hero */
+        .hero-divider::before { background: linear-gradient(90deg, transparent, rgba(245, 207, 114, 0.95)); }
+        .hero-divider::after { background: linear-gradient(90deg, rgba(245, 207, 114, 0.95), transparent); }
+        .hero-divider i { color: var(--emas-terang); }
+        .hero-chip i { color: var(--emas-terang); }
+        .hero-chip {
+            background: rgba(255, 255, 255, 0.10);
+            border-color: rgba(255, 255, 255, 0.28);
+        }
+
+        /* Tombol utama: gradasi samudra + glow */
+        .hero-bg .bg-green-600,
+        #back-to-top {
+            background-image: linear-gradient(135deg, #2b8fe8 0%, #125aa8 100%);
+            box-shadow: 0 12px 30px rgba(18, 74, 136, 0.35);
+        }
+
+        /* Navbar: kaca gelap elegan saat di atas, terang saat digulir */
+        #navbar {
+            background-color: rgba(6, 24, 44, 0.32);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        #navbar:not(.nav-scrolled) .text-gray-700,
+        #navbar:not(.nav-scrolled) .text-gray-800 {
+            color: rgba(255, 255, 255, 0.92);
+        }
+
+        #navbar:not(.nav-scrolled) .text-gray-600 {
+            color: rgba(255, 255, 255, 0.65);
+        }
+
+        #navbar:not(.nav-scrolled) #mobile-menu .text-gray-700 { color: #374151; }
+        #navbar:not(.nav-scrolled) #mobile-menu .text-gray-800 { color: #1f2937; }
+        #navbar:not(.nav-scrolled) #mobile-menu .text-gray-600 { color: #4b5563; }
+
+        .nav-scrolled {
+            background-color: rgba(251, 253, 255, 0.90);
+            backdrop-filter: blur(14px);
+            box-shadow: 0 2px 24px rgba(16, 60, 108, 0.10);
+            border-bottom: 1px solid rgba(226, 171, 69, 0.28);
+        }
+
+        #navbar.nav-scrolled .text-xl {
+            background: linear-gradient(90deg, #124b88, #2b8fe8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Footer samudra pekat dengan garis emas */
+        footer.bg-gray-800 {
+            background-color: #061a30;
+            background-image: var(--corak-geo-putih), linear-gradient(160deg, #103c6c 0%, #061527 100%);
+            box-shadow: inset 0 3px 0 var(--emas);
+        }
+
+        /* Kartu: garis halus + bayangan berwarna saat hover */
+        .profil-card,
+        .kegiatan-card,
+        .potensi-card,
+        .kkn-card {
+            border: 1px solid rgba(18, 75, 136, 0.08);
+        }
+
+        .profil-card:hover,
+        .kegiatan-card:hover,
+        .potensi-card:hover,
+        .kkn-card:hover {
+            box-shadow: 0 24px 48px rgba(16, 60, 108, 0.16);
+        }
+
+        /* Scrollbar & seleksi bertema */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: #e4edf6; }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #2b8fe8, #124b88);
+            border-radius: 999px;
+        }
+        ::-webkit-scrollbar-thumb:hover { background: #1670cf; }
+
+        ::selection { background: rgba(226, 171, 69, 0.35); }
+
+        @media (max-width: 768px) {
+            .hero-bg::before { width: 260px; height: 260px; }
+            .hero-bg::after { width: 220px; height: 220px; }
+        }
+    </style>
+</head>
+<body class="scroll-smooth">
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-3">
+                    <img src="https://z-cdn-media.chatglm.cn/files/777eb9b4-9b66-4392-b238-5c81c44db3aa.png?auth_key=1892167373-03b39aa6686d42389a6014cbae9d7af1-0-c7f8c473146e9a9a675be53c7cf61466" alt="Logo Kabupaten Buton" class="logo-nav">
+                    <div>
+                        <span class="text-xl font-bold text-gray-800">Desa Lambusango</span>
+                        <p class="text-xs text-gray-600">Kecamatan Kapontori</p>
+                    </div>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#beranda" class="text-gray-700 hover:text-green-600 transition">Beranda</a>
+                    <a href="#tentang" class="text-gray-700 hover:text-green-600 transition">Tentang</a>
+                    <a href="#profil" class="text-gray-700 hover:text-green-600 transition">Profil</a>
+                    <a href="#kegiatan" class="text-gray-700 hover:text-green-600 transition">Kegiatan</a>
+                    <a href="#potensi" class="text-gray-700 hover:text-green-600 transition">Potensi</a>
+                    <a href="#galeri" class="text-gray-700 hover:text-green-600 transition">Galeri</a>
+                    <a href="#kkn" class="text-gray-700 hover:text-green-600 transition">Anggota KKN</a>
+                    <a href="#moment" class="text-gray-700 hover:text-green-600 transition">Moment of KKN</a>
+                    <a href="#peta" class="text-gray-700 hover:text-green-600 transition">Peta</a>
+                </div>
+                <button id="mobile-menu-btn" class="md:hidden">
+                    <i class="fas fa-bars text-2xl text-gray-700"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+            <div class="px-4 py-2 space-y-2">
+                <a href="#beranda" class="block py-2 text-gray-700 hover:text-green-600">Beranda</a>
+                <a href="#tentang" class="block py-2 text-gray-700 hover:text-green-600">Tentang</a>
+                <a href="#profil" class="block py-2 text-gray-700 hover:text-green-600">Profil</a>
+                <a href="#kegiatan" class="block py-2 text-gray-700 hover:text-green-600">Kegiatan</a>
+                <a href="#potensi" class="block py-2 text-gray-700 hover:text-green-600">Potensi</a>
+                <a href="#galeri" class="block py-2 text-gray-700 hover:text-green-600">Galeri</a>
+                <a href="#kkn" class="block py-2 text-gray-700 hover:text-green-600">Anggota KKN</a>
+                <a href="#moment" class="block py-2 text-gray-700 hover:text-green-600">Moment of KKN</a>
+                <a href="#peta" class="block py-2 text-gray-700 hover:text-green-600">Peta</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="beranda" class="hero-bg min-h-screen flex items-center">
+        <div class="container mx-auto px-4">
+            <div class="text-center text-white fade-in">
+                <img src="https://z-cdn-media.chatglm.cn/files/777eb9b4-9b66-4392-b238-5c81c44db3aa.png?auth_key=1892167373-03b39aa6686d42389a6014cbae9d7af1-0-c7f8c473146e9a9a675be53c7cf61466" alt="Logo Kabupaten Buton" class="logo-hero mx-auto mb-6">
+                <h1 class="hero-title">
+                    <span class="hero-greeting">Selamat Datang di</span>
+                    <span class="hero-village">Desa Lambusango</span>
+                </h1>
+                <div class="hero-divider"><i class="fas fa-leaf"></i></div>
+                <p class="text-xl md:text-2xl mb-6 max-w-3xl mx-auto hero-subtitle">Desa yang penuh dengan keindahan alam, kearifan lokal, dan semangat gotong royong untuk kemajuan bersama</p>
+                <div class="mb-10">
+                    <span class="hero-chip"><i class="fas fa-location-dot"></i>Kecamatan Kapontori &middot; Kabupaten Buton &middot; Sulawesi Tenggara</span>
+                </div>
+                <div class="space-x-4 flex flex-col md:flex-row justify-center items-center">
+                    <a href="#tentang" class="inline-block bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-full font-semibold transition transform hover:scale-105 mb-4 md:mb-0 md:mr-4">
+                        Jelajahi Desa
+                    </a>
+                    <a href="#peta" class="inline-block border-2 border-white hover:bg-white hover:text-gray-800 text-white px-8 py-4 rounded-full font-semibold transition">
+                        Lihat Peta Lokasi
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="tentang" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12 fade-in">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Tentang Desa Kami</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Mengenal lebih dekat Desa Lambusango dengan segala keunikannya</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="fade-in about-image relative" id="about-image-container">
+                    <img src="https://z-cdn-media.chatglm.cn/files/40dabd2a-ca22-4ec5-9939-f96f585310d9.png?auth_key=1892759104-da86057878ec4019b547bd6d3dba7ef5-0-4897eb9f7d9610df19ea4c5589c4afb6" alt="Kantor Kepala Desa Lambusango" class="rounded-lg shadow-lg w-full">
+                    <div class="zoom-indicator">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="fade-in">
+                    <h3 class="text-2xl font-semibold mb-4 text-gray-800">Desa yang Berbudaya dan Maju</h3>
+                    <p class="text-gray-600 mb-4">Desa Lambusango merupakan salah satu desa yang berada di Kecamatan Kapontori, Kabupaten Buton, Provinsi Sulawesi Tenggara. Secara geografis, Desa Lambusango memiliki kondisi topografi yang bervariasi, terdiri atas dataran rendah, perbukitan, dan sebagian wilayah yang berbatasan langsung dengan kawasan hutan Lambusango. Keanekaragaman topografi tersebut memberikan karakter tersendiri bagi desa ini, baik dari segi potensi sumber daya alam maupun pola kehidupan masyarakatnya. </p>
+                    <p class="text-gray-600 mb-4">Potensi wilayah Desa Lambusango sangat besar, terutama di sektor pertanian dan perikanan. Tanah yang subur memungkinkan masyarakat mengembangkan berbagai komoditas unggulan pertanian, seperti padi, jagung, ubi kayu, serta tanaman hortikultura lainnya. Di sisi lain, letak wilayah yang strategis dan dekat dengan pesisir menjadikan sektor perikanan tangkap maupun budidaya memiliki prospek yang sangat menjanjikan bagi peningkatan kesejahteraan masyarakat</p>
+                    <p class="text-gray-600 mb-6">Selain potensi sumber daya alamnya, Desa Lambusango juga memiliki posisi yang sangat strategis dalam sistem transportasi regional. Wilayah ini menjadi jalur perlintasan bus DAMRI yang menghubungkan Kota Baubau dengan Kota Kendari, ibu kota Provinsi Sulawesi Tenggara. Kondisi ini menjadikan Lambusango sebagai kawasan yang cukup ramai dilalui masyarakat dari berbagai daerah, sekaligus membuka peluang ekonomi baru di sektor perdagangan dan jasa.</p>
+                    <div class="grid grid-cols-3 gap-4 text-center">
+                        <div class="bg-white p-4 rounded-lg shadow">
+                            <i class="fas fa-users text-3xl text-green-600 mb-2"></i>
+                            <h4 class="font-semibold">2,500+</h4>
+                            <p class="text-sm text-gray-600">Penduduk</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg shadow">
+                            <i class="fas fa-home text-3xl text-green-600 mb-2"></i>
+                            <h4 class="font-semibold">500+</h4>
+                            <p class="text-sm text-gray-600">Rumah Tangga</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg shadow">
+                            <i class="fas fa-landmark text-3xl text-green-600 mb-2"></i>
+                            <h4 class="font-semibold">10+</h4>
+                            <p class="text-sm text-gray-600">Fasilitas Umum</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Profile Section -->
+    <section id="profil" class="py-20 section-gradient-profil">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12 fade-in">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Profil Desa</h2>
+                <p class="text-gray-600">Visi, Misi, dan Sejarah Desa Lambusango</p>
+            </div>
+            <div id="profil-container" class="grid md:grid-cols-3 gap-8">
+                <!-- Profil data akan dimuat di sini dari API -->
+                <div class="text-center py-12">
+                    <div class="loading mx-auto"></div>
+                    <p class="mt-4 text-gray-600">Memuat data profil...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Kegiatan Section -->
+    <section id="kegiatan" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12 fade-in">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Kegiatan</h2>
+                <p class="text-gray-600">Informasi kegiatan terkini di desa kami</p>
+            </div>
+            <div id="kegiatan-container" class="grid md:grid-cols-3 gap-8">
+                <!-- Kegiatan akan dimuat di sini dari API -->
+                <div class="text-center py-12 col-span-3">
+                    <div class="loading mx-auto"></div>
+                    <p class="mt-4 text-gray-600">Memuat data kegiatan...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Potensi Section -->
+    <section id="potensi" class="py-20 section-gradient-potensi">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12 fade-in">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Potensi Desa</h2>
+                <p class="text-gray-600">Keunggulan dan sumber daya yang dimiliki desa kami</p>
+            </div>
+            <div id="potensi-container" class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Potensi akan dimuat di sini dari API -->
+                <div class="text-center py-12 col-span-4">
+                    <div class="loading mx-auto"></div>
+                    <p class="mt-4 text-gray-600">Memuat data potensi...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="galeri" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12 fade-in">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Galeri Foto</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Kumpulan foto keindahan alam dan kegiatan di Desa Lambusango</p>
+            </div>
+            <div id="gallery-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                <!-- Gallery items will be loaded here -->
+                <div class="text-center py-12 col-span-3">
+                    <div class="loading mx-auto"></div>
+                    <p class="mt-4 text-gray-600">Memuat galeri foto...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Anggota KKN Section -->
+    <section id="kkn" class="py-20 section-gradient-kkn">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12 fade-in">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Anggota KKN 2026</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Tim Kuliah Kerja Nyata (KKN) Tahun 2026 yang ditugaskan di Desa Lambusango</p>
+            </div>
+            <div class="kkn-grid">
+                <div class="kkn-card fade-in">
+                    <div class="kkn-avatar-wrap">
+                        <img src="https://z-cdn-media.chatglm.cn/files/370b5f4c-07af-487d-930b-3f0098e64911.jpeg?auth_key=1892762166-3fa01bcc45bb40919096f71d4316087e-0-075c5d08b502c1b36242b0ae009924b0" alt="Foto Nezal Tata" class="kkn-avatar" style="object-position: center 18%;">
+                    </div>
+                    <h3 class="kkn-name">Nezal Tata</h3>
+                    <p class="kkn-prodi">Manajemen</p>
+                </div>
+                <div class="kkn-card fade-in">
+                    <div class="kkn-avatar-wrap">
+                        <img src="https://z-cdn-media.chatglm.cn/files/f6848a63-239d-4101-9e0f-9847124eedbc.png?auth_key=1892766931-6fe03092c5e44f10b1dd3cca1a7c8dfa-0-1fd5700effde7929e5f7958db558b7a6" alt="Foto Muhammad Arya Pradana" class="kkn-avatar" style="object-position: center 18%;">
+                    </div>
+                    <h3 class="kkn-name">Muhammad Arya Pradana</h3>
+                    <p class="kkn-prodi">Manajemen</p>
+                </div>
+                <div class="kkn-card fade-in">
+                    <div class="kkn-avatar-wrap">
+                        <img src="https://z-cdn-media.chatglm.cn/files/3ef4a357-47ca-4cd4-aba7-5ef9bfc88aeb.jpeg?auth_key=1892762760-221ed7fff2af4a769239ef651acb8f08-0-9b71de27ee444f16d5899d8eea09578d" alt="Foto Rizki" class="kkn-avatar" style="object-position: center 18%;">
+                    </div>
+                    <h3 class="kkn-name">Rizki</h3>
+                    <p class="kkn-prodi">Akuntansi</p>
+                </div>
+                <div class="kkn-card fade-in">
+                    <div class="kkn-avatar-wrap">
+                        <img src="https://z-cdn-media.chatglm.cn/files/605d7d3e-3f8d-4d74-bfec-8d38572fb10b.jpeg?auth_key=1892762760-5ad04283bb1b4f8f93c0a5bfd54e45e7-0-db201d6cfd56e12154ddcaec80bf2a69" alt="Foto Ferdi Falana" class="kkn-avatar" style="object-position: center 18%;">
+                    </div>
+                    <h3 class="kkn-name">Ferdi Falana</h3>
+                    <p class="kkn-prodi">Teknik Sipil</p>
+                </div>
+                <div class="kkn-card fade-in">
+                    <div class="kkn-avatar-wrap">
+                        <img src="https://z-cdn-media.chatglm.cn/files/64305009-4ea1-4922-884b-d67343e4b33d.jpeg?auth_key=1892763484-6a6415aa2cbe4c07a9d858b3bfb1ca38-0-af50847d3dfc47e47f6df0f1b6163abd" alt="Foto Anti Melianti" class="kkn-avatar" style="object-position: center 18%;">
+                    </div>
+                    <h3 class="kkn-name">Anti Melianti</h3>
+                    <p class="kkn-prodi">Pend. Agama Islam</p>
+                </div>
+                <div class="kkn-card fade-in">
+                    <div class="kkn-avatar-wrap">
+                        <img src="https://z-cdn-media.chatglm.cn/files/a9da8670-5224-4ce2-a642-1af67ca43e3d.jpeg?auth_key=1892763735-d570940601b042bd9b8b7180210ce071-0-9f8a4bdcf1d4a02816c75bff3e3bc611" alt="Foto Nova Malba" class="kkn-avatar" style="object-position: center 18%;">
+                    </div>
+                    <h3 class="kkn-name">Nova Malba</h3>
+                    <p class="kkn-prodi">Pend. Agama Islam</p>
+                </div>
+                <div class="kkn-card fade-in">
+                    <div class="kkn-avatar-wrap">
+                        <img src="https://z-cdn-media.chatglm.cn/files/050cc712-e43d-4762-bbeb-0bfabacda7aa.jpeg?auth_key=1892763735-9a0ceec4b0d64d849742efe13d1a52f1-0-1e5db275468d8aafe30da3f6df2aad04" alt="Foto Ika Putri Asmayanti" class="kkn-avatar" style="object-position: center 18%;">
+                    </div>
+                    <h3 class="kkn-name">Ika Putri Asmayanti</h3>
+                    <p class="kkn-prodi">Manajemen</p>
+                </div>
+                <div class="kkn-card fade-in">
+                    <div class="kkn-avatar-wrap">
+                        <img src="https://z-cdn-media.chatglm.cn/files/a8f4fcd1-1f93-4e0a-b375-98d5b1dd4356.jpeg?auth_key=1892763735-4a93f73e88c34bb78504a8f1ad0d2daf-0-a581869b1d302061ba16417f807d915e" alt="Foto Dian Rahmawati" class="kkn-avatar" style="object-position: center 18%;">
+                    </div>
+                    <h3 class="kkn-name">Dian Rahmawati</h3>
+                    <p class="kkn-prodi">Pend. Agama Islam</p>
+                </div>
+                <div class="kkn-card fade-in">
+                    <div class="kkn-avatar-wrap">
+                        <img src="https://z-cdn-media.chatglm.cn/files/77f23174-33f4-4ebb-8a80-5460c8c67ca0.jpeg?auth_key=1892763735-9069e3d4f16c4b99b9b58965e5d945ce-0-fda1368037a20966704d7736c5932482" alt="Foto Sri Mulyani" class="kkn-avatar" style="object-position: center 18%;">
+                    </div>
+                    <h3 class="kkn-name">Sri Mulyani</h3>
+                    <p class="kkn-prodi">Manajemen</p>
+                </div>
+                <div class="kkn-card fade-in">
+                    <div class="kkn-avatar-wrap">
+                        <img src="https://z-cdn-media.chatglm.cn/files/fad52d09-0990-4e31-9233-1dd83612a899.jpeg?auth_key=1892763735-7d1a1b77dd5044a3945cf3c021ece388-0-b5925ea2fd70040406b63849c70c413b" alt="Foto Serlina" class="kkn-avatar" style="object-position: center 18%;">
+                    </div>
+                    <h3 class="kkn-name">Serlina</h3>
+                    <p class="kkn-prodi">PGSD</p>
+                </div>
+                <div class="kkn-card fade-in">
+                    <div class="kkn-avatar-wrap">
+                        <img src="https://z-cdn-media.chatglm.cn/files/5bfaeb60-eb42-4ac7-91ee-2e65cdf497bc.png?auth_key=1892764076-5b03ac517e6f4e409ce84328e59c1263-0-829c4def27a7761a1e68a8b19d35d8e2" alt="Foto Neheymya" class="kkn-avatar kkn-avatar-zoom" style="object-position: center 18%; transform-origin: center 20%;">
+                    </div>
+                    <h3 class="kkn-name">Neheymya</h3>
+                    <p class="kkn-prodi">Hukum</p>
+                </div>
+                <div class="kkn-card fade-in">
+                    <div class="kkn-avatar-wrap">
+                        <img src="https://z-cdn-media.chatglm.cn/files/e44ecb5c-2b93-42e5-a75a-9e421ba4ae54.jpeg?auth_key=1892764076-e1024a09c3734dc68e2894884fcb55b3-0-f53487fa90927a6a9273d680fe5dcce2" alt="Foto Naya" class="kkn-avatar" style="object-position: center 18%;">
+                    </div>
+                    <h3 class="kkn-name">Naya</h3>
+                    <p class="kkn-prodi">PGSD</p>
+                </div>
+                <div class="kkn-card fade-in">
+                    <div class="kkn-avatar-wrap">
+                        <img src="https://z-cdn-media.chatglm.cn/files/206e6250-b5d9-48a8-8bd4-619428c61c5d.jpeg?auth_key=1892764076-00d945efc69d4c32bb07dabd8305cc88-0-e9b53d9be46c7597310b5521e1f8137e" alt="Foto Wa Ode Finfi Fijriani" class="kkn-avatar" style="object-position: center 18%;">
+                    </div>
+                    <h3 class="kkn-name">Wa Ode Finfi Fijriani</h3>
+                    <p class="kkn-prodi">PG.PAUD</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Moment of KKN Section -->
+    <section id="moment" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12 fade-in">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Moment of KKN</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Dokumentasi kebersamaan dan kegiatan KKN di Desa Lambusango</p>
+            </div>
+            <div class="moment-grid">
+                <div class="moment-photo">
+                    <img src="https://z-cdn-media.chatglm.cn/files/b1e6ac47-1bc9-4e7d-8376-3ae1cf7e7286.jpeg?auth_key=1892178377-f82b7e13fabe42e98d6bd5f00fdf87f9-0-5b23eff7bfdb546f350a90b517d8eed6" alt="Dokumentasi KKN">
+                    <div class="zoom-indicator"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="moment-photo">
+                    <img src="https://z-cdn-media.chatglm.cn/files/f8d3dd1f-6286-481d-939f-744b2f8cf832.jpeg?auth_key=1892178377-8d0d0834805f4934b6da0f5d9b68ec64-0-a10c5c1a085bc6d77ab990ad174c496b" alt="Dokumentasi KKN">
+                    <div class="zoom-indicator"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="moment-photo">
+                    <img src="https://z-cdn-media.chatglm.cn/files/335f82a5-523f-4471-9bac-47de0d02fb03.jpeg?auth_key=1892178377-241efbc6cc004e779c1fa477bd33db37-0-3ea58eaa1dc2b357f26b311eeea4e658" alt="Dokumentasi KKN">
+                    <div class="zoom-indicator"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="moment-photo">
+                    <img src="https://z-cdn-media.chatglm.cn/files/76a082cd-0f1e-4f6a-87a5-5908c8be8309.jpeg?auth_key=1892178377-f1420d8413ab42a1baa570ceaac4a3c3-0-212844486715ea83f572e71d1383a1b3" alt="Dokumentasi KKN">
+                    <div class="zoom-indicator"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="moment-photo">
+                    <img src="https://z-cdn-media.chatglm.cn/files/da0e1c0d-d4ae-4e1b-99a3-4d0a6c480a77.jpeg?auth_key=1892178377-f9ddea071e864b4eafc2884c4ee01486-0-125a80f9438373b0a781f9ecd62ac199" alt="Dokumentasi KKN">
+                    <div class="zoom-indicator"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="moment-photo">
+                    <img src="https://z-cdn-media.chatglm.cn/files/6148aab1-5f8b-499d-9db9-a9e955bc467f.jpeg?auth_key=1892178377-facb4ea9217f45d4b8eafa445b00c5b2-0-87017786a677f150c695d8fbff83ea93" alt="Dokumentasi KKN">
+                    <div class="zoom-indicator"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="moment-photo">
+                    <img src="https://z-cdn-media.chatglm.cn/files/55e094c4-ef07-4b46-aa2f-72f675efa235.jpeg?auth_key=1892178682-15d2791ae5bf4981a1bd282b8c4de700-0-0785fe115a47dda71b7fd0c90dae8ae2" alt="Dokumentasi KKN">
+                    <div class="zoom-indicator"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="moment-photo">
+                    <img src="https://z-cdn-media.chatglm.cn/files/82ea7ea9-847e-402a-8a84-6babb948cd5f.jpeg?auth_key=1892178682-10e16394bd5948d3b898f12d9f5aab15-0-08b5e73dd5f012a6537488a7527d7317" alt="Dokumentasi KKN">
+                    <div class="zoom-indicator"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="moment-photo">
+                    <img src="https://z-cdn-media.chatglm.cn/files/bc67a71d-8d13-447c-ba9b-0adcfc66ae5f.jpeg?auth_key=1892178682-b503e718a0da403790066a0ad404a758-0-2355f1ea11c47be9cf3c954fcf100756" alt="Dokumentasi KKN">
+                    <div class="zoom-indicator"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="moment-photo">
+                    <img src="https://z-cdn-media.chatglm.cn/files/d48db3fa-50b4-441d-a694-9d12a15e4e47.jpeg?auth_key=1892178682-8698cf73cd7245879f58fbe52613a42d-0-b77ddcf7699092158171d764548a32b6" alt="Dokumentasi KKN">
+                    <div class="zoom-indicator"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="moment-photo">
+                    <img src="https://z-cdn-media.chatglm.cn/files/bded00be-c8a6-40ca-9075-b24e6703fcf6.jpeg?auth_key=1892179243-ec4921d047204b1fa0c1461e4e643569-0-dcbc80bb04635248331245e0940c941f" alt="Dokumentasi KKN">
+                    <div class="zoom-indicator"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="moment-photo">
+                    <img src="https://z-cdn-media.chatglm.cn/files/f2dcac85-ba5f-4b2f-a5fb-556b76aa36c5.jpeg?auth_key=1892179243-ba2527e570c340398e4d4176b5300b23-0-b60910ad3fab655606667c04f1af8a7c" alt="Dokumentasi KKN">
+                    <div class="zoom-indicator"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="moment-photo">
+                    <img src="https://z-cdn-media.chatglm.cn/files/7a0cf4cb-4647-4737-a2ed-4ca7e132fd72.jpeg?auth_key=1892179243-b88a67a943f24cf08a6a96546d663be6-0-545c7d18594121fd282cf4063e678196" alt="Dokumentasi KKN">
+                    <div class="zoom-indicator"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="moment-photo">
+                    <img src="https://z-cdn-media.chatglm.cn/files/c1c3eaf0-a866-4973-a3f7-2aa6968da84e.jpeg?auth_key=1892179243-7f4140d83fbe43f98cfd9b0ee0c14e34-0-55d50b6e4241d3cd5fcd5313dac90e1b" alt="Dokumentasi KKN" style="object-position: center 85%;">
+                    <div class="zoom-indicator"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="moment-photo">
+                    <img src="https://z-cdn-media.chatglm.cn/files/f27b94f3-6481-44fc-8b91-bddb7d5fdd60.jpeg?auth_key=1892179815-fc95ba68e2ec40f5b3ac44a8c0c5cc1c-0-261c0f844e07f4cd1ef7b7e9317dbc6a" alt="Dokumentasi KKN">
+                    <div class="zoom-indicator"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="moment-photo">
+                    <img src="https://z-cdn-media.chatglm.cn/files/f5c80f25-3269-4c79-9449-abf245cea0ba.jpeg?auth_key=1892179815-cf4ae9cb1e544bf5a77f2ab9173e5da0-0-ae53bdae4e0f8489805bdc9529c84c38" alt="Dokumentasi KKN">
+                    <div class="zoom-indicator"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="moment-photo">
+                    <img src="https://z-cdn-media.chatglm.cn/files/2dd10a89-1b5d-4e48-81ca-73d07d21fe65.jpeg?auth_key=1892179815-8bf5372dac9d4becb36bd21d6d7bbc19-0-58a378cc2ed35b8a9bc41db828228b12" alt="Dokumentasi KKN">
+                    <div class="zoom-indicator"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="moment-photo">
+                    <img src="https://z-cdn-media.chatglm.cn/files/40d89f0d-59b7-4b43-959b-65a19c4d4f5d.jpeg?auth_key=1892179815-4d3b71f91f734e909c76af681cc2c034-0-1f101ae7bc5e39abde681e52a7b77727" alt="Dokumentasi KKN">
+                    <div class="zoom-indicator"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="moment-photo">
+                    <img src="https://z-cdn-media.chatglm.cn/files/95d49a80-7e97-4d94-b859-f87e3b5dc7e4.jpeg?auth_key=1892180068-37e9b2319f234a39b92069b495f81b76-0-2d1e57a10252398f7610b44cbdda240d" alt="Dokumentasi KKN">
+                    <div class="zoom-indicator"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="moment-photo">
+                    <img src="https://z-cdn-media.chatglm.cn/files/5fda442b-2cab-43fe-b9d6-634b175d4953.jpeg?auth_key=1892180068-aae0aa61478d4021b94d765a03b0a20a-0-cb4af211dfe8cc3dcc757795cb2383bf" alt="Dokumentasi KKN">
+                    <div class="zoom-indicator"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="moment-photo">
+                    <img src="https://z-cdn-media.chatglm.cn/files/1de0b523-8752-4873-98b6-a575340612ac.jpeg?auth_key=1892180884-c272722ef6714b078bba1bb8ac0e8a99-0-3ef6e29bd5aa85260d30f47bcd057c94" alt="Dokumentasi KKN" style="object-position: center 65%;">
+                    <div class="zoom-indicator"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="moment-photo">
+                    <img src="https://z-cdn-media.chatglm.cn/files/f958fd73-8ece-4dd6-a631-1b5c28fb0129.jpeg?auth_key=1892180884-78c0914dc35242af9e227d574908b335-0-f4a7188eddaa389acd6f84a5481664bb" alt="Dokumentasi KKN">
+                    <div class="zoom-indicator"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="moment-photo">
+                    <img src="https://z-cdn-media.chatglm.cn/files/5aaba2e2-7d9c-46de-965b-1bd2697f1d49.jpeg?auth_key=1892180884-06d4d962642c4dec93baebd0fc7a594e-0-d73016d496bceff849da05f93ed646d9" alt="Dokumentasi KKN" style="object-position: center 65%;">
+                    <div class="zoom-indicator"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="moment-photo">
+                    <img src="https://z-cdn-media.chatglm.cn/files/0659e2ce-8956-470e-b8b1-fd5be466fdb8.jpeg?auth_key=1892181171-916d2f89deb743d2be9c7cc7e25a7132-0-e6a87f8df0a95f16d4d4695d07e41228" alt="Dokumentasi KKN" style="object-position: center 85%;">
+                    <div class="zoom-indicator"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="moment-photo">
+                    <img src="https://z-cdn-media.chatglm.cn/files/a3c54430-38cf-421a-bede-0e4cff7bab78.jpeg?auth_key=1892181171-85085b76630f442cb3d864a250f68df5-0-a5b2a7f2565fb455e67aa254f8e9b66c" alt="Dokumentasi KKN" style="object-position: center 85%;">
+                    <div class="zoom-indicator"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="moment-photo">
+                    <img src="https://z-cdn-media.chatglm.cn/files/57d86aa0-3fb4-468c-b43f-00b0f7febc32.jpeg?auth_key=1892181171-98f22b5e01464439a7194d96260f3781-0-ddf97436d0b483d71a1dfbb7c761d67b" alt="Dokumentasi KKN" style="object-position: center 70%;">
+                    <div class="zoom-indicator"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="moment-photo">
+                    <img src="https://z-cdn-media.chatglm.cn/files/0f5a340b-cccc-4d55-8bd7-874918e03bbe.jpeg?auth_key=1892181389-1b7a7058edf449efb0d8a0b7a84d0379-0-39e885999851a0878b0576bfbe483ee1" alt="Dokumentasi KKN">
+                    <div class="zoom-indicator"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="moment-photo">
+                    <img src="https://z-cdn-media.chatglm.cn/files/f12af679-22d9-4421-88e1-d44ce9530dda.jpeg?auth_key=1892181389-ceae35d59edb41d4aa7fbe313f2e5b7d-0-6a2cff69f031b7d249d4ea1de81debbb" alt="Dokumentasi KKN" style="object-position: center 70%;">
+                    <div class="zoom-indicator"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="moment-photo">
+                    <img src="https://z-cdn-media.chatglm.cn/files/8896609c-ce4c-4ca5-834e-a60b51dae0e4.jpeg?auth_key=1892181389-4f471923139d4fb6a74c2144de6b2011-0-4e66ea56d35c6fcc5efb368c4770b245" alt="Dokumentasi KKN" style="object-position: center 35%;">
+                    <div class="zoom-indicator"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="moment-photo">
+                    <img src="https://z-cdn-media.chatglm.cn/files/6b2404c4-e67b-46ae-b88b-1b2fcfe47907.jpeg?auth_key=1892181389-65b20d31c57f40818ef0bc13c200d11a-0-eb4c89e204ddfebcde698884eef4d9c2" alt="Dokumentasi KKN">
+                    <div class="zoom-indicator"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="moment-photo">
+                    <img src="https://z-cdn-media.chatglm.cn/files/6860fb50-2304-439f-84b2-0a7930b6b209.jpeg?auth_key=1892181389-aca321ca559b4ad48db0620451cc44a9-0-9ac00655aaf6d01c8d9338c52bec0d46" alt="Dokumentasi KKN" style="object-position: center 35%;">
+                    <div class="zoom-indicator"><i class="fas fa-search-plus"></i></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section id="peta" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12 fade-in">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Lokasi Desa</h2>
+                <p class="text-gray-600">Peta dan akses menuju Desa Lambusango</p>
+            </div>
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                <div class="md:flex">
+                    <!-- Left Panel - Location Information -->
+                    <div class="md:w-2/5 p-6 bg-gray-50">
+                        <h3 class="text-xl font-bold text-gray-800 mb-4 pb-2 border-b border-gray-200">Riwayat Lokasi</h3>
+
+                        <div class="space-y-4">
+                            <div>
+                                <h4 class="text-sm font-semibold text-gray-700 mb-1">Alamat Lengkap</h4>
+                                <p class="text-sm text-gray-600">Desa Lambusango, Kecamatan Kapontori, Kabupaten Buton, Provinsi Sulawesi Tenggara</p>
+                            </div>
+
+                            <div>
+                                <h4 class="text-sm font-semibold text-gray-700 mb-1">Transportasi</h4>
+                                <p class="text-sm text-gray-600">Dapat diakses dari pusat Kecamatan Kapontori menggunakan kendaraan roda dua atau empat</p>
+                            </div>
+
+                            <div>
+                                <h4 class="text-sm font-semibold text-gray-700 mb-1">Waktu Tempuh dan jarak</h4>
+                                <p class="text-sm text-gray-600">± 1 jam 40 menit (77 km) dari ibukota Kabupaten</p>
+                            </div>
+
+                            <div>
+                                <h4 class="text-sm font-semibold text-gray-700 mb-1">Batas Wilayah</h4>
+                                <h4 class="text-sm font-semibold text-gray-700 mb-1">Secara Administrasi Desa Lambusango berbatasan dengan:</h4>
+                                <ul class="text-sm text-gray-600 list-disc pl-5 space-y-1">
+                                    <li>Utara: Desa Tumada</li>
+                                    <li>Selatan: Hutan Lambusango</li>
+                                    <li>Timur: Kelurahan Wakangka</li>
+                                    <li>Barat: Teluk Kapontori</li>
+                                </ul>
+                            </div>
+
+                            <div>
+                                <h4 class="text-sm font-semibold text-gray-700 mb-1">Koordinat Geografis</h4>
+                                <p class="text-sm text-gray-600">5°14'47"S 122°47'02"E</p>
+                                <p class="text-sm text-gray-500">-5.2463356, 122.7839364</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Panel - Map -->
+                    <div class="md:w-3/5">
+                        <div class="relative h-96 md:h-full">
+                            <iframe
+                                src="https://www.google.com/maps?q=-5.2463356,122.7839364&output=embed"
+                                width="100%"
+                                height="100%"
+                                style="border:0;"
+                                allowfullscreen=""
+                                loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade">
+                            </iframe>
+
+                            <!-- Map Info Overlay -->
+                            <div class="absolute top-4 right-4 bg-white p-3 rounded-lg shadow-md max-w-xs map-info-overlay">
+                                <h4 class="font-bold text-gray-800 mb-1">Desa Lambusango</h4>
+                                <p class="text-xs text-gray-600 mb-1">Kecamatan Kapontori</p>
+                                <p class="text-xs text-gray-600">Kabupaten Buton, Sulawesi Tenggara</p>
+                                <p class="text-xs text-gray-500 mt-1"><i class="fas fa-location-dot mr-1 text-green-600"></i>-5.2463356, 122.7839364</p>
+                            </div>
+                        </div>
+                        <div class="p-4 border-t border-gray-200 flex justify-center">
+                            <a href="https://www.google.com/maps/search/?api=1&query=-5.2463356,122.7839364" target="_blank" class="inline-flex items-center bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg transition">
+                                <i class="fas fa-map-marked-alt mr-2"></i>
+                                Buka di Google Maps
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="md:col-span-2">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <img src="https://z-cdn-media.chatglm.cn/files/777eb9b4-9b66-4392-b238-5c81c44db3aa.png?auth_key=1892167373-03b39aa6686d42389a6014cbae9d7af1-0-c7f8c473146e9a9a675be53c7cf61466" alt="Logo Kabupaten Buton" class="logo-footer">
+                        <div>
+                            <span class="text-xl font-bold">Desa Lambusango</span>
+                            <p class="text-xs text-gray-400">Kecamatan Kapontori</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-400">Membangun desa yang sejahtera, mandiri, dan berbudaya untuk kemajuan bersama.</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Link Cepat</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#beranda" class="hover:text-white transition">Beranda</a></li>
+                        <li><a href="#tentang" class="hover:text-white transition">Tentang</a></li>
+                        <li><a href="#profil" class="hover:text-white transition">Profil</a></li>
+                        <li><a href="#kegiatan" class="hover:text-white transition">Kegiatan</a></li>
+                        <li><a href="#potensi" class="hover:text-white transition">Potensi</a></li>
+                        <li><a href="#galeri" class="hover:text-white transition">Galeri</a></li>
+                        <li><a href="#kkn" class="hover:text-white transition">Anggota KKN</a></li>
+                        <li><a href="#moment" class="hover:text-white transition">Moment of KKN</a></li>
+                        <li><a href="#peta" class="hover:text-white transition">Peta</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2026 Desa Lambusango, Kecamatan Kapontori. All rights reserved. | Developed with kkn UMB 2026</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="fixed bottom-8 right-8 bg-green-600 hover:bg-green-700 text-white w-12 h-12 rounded-full shadow-lg hidden transition transform hover:scale-110">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <div class="lightbox-content">
+            <img id="lightbox-img" src="" alt="">
+            <div class="lightbox-caption" id="lightbox-caption"></div>
+        </div>
+    </div>
+
+    <script>
+        // API Base URL - ganti dengan URL API Anda
+        const API_BASE_URL = 'http://localhost:8080/api';
+
+        // Data dummy untuk fallback jika API tidak tersedia
+        const dummyProfil = {
+            visi: "Terwujudnya Desa Lambusango yang sejahtera, mandiri, dan berbudaya berbasis kearifan lokal serta teknologi informasi",
+            misi: "Meningkatkan kualitas SDM masyarakat\nMengembangkan potensi ekonomi desa\nMelestarikan budaya dan lingkungan\nMewujudkan tata kelola pemerintahan yang baik",
+            sejarah: "Desa Lambusango adalah salah satu desa di Kecamatan Kapontori yang memiliki sejarah panjang dalam membangun masyarakat yang harmonis dan makmur. Seiring waktu, desa terus berkembang dengan mempertahankan nilai-nilai luhur dan budaya lokal."
+        };
+
+        const dummyKegiatan = [
+            {
+                id: 1,
+                judul: "PESTA SYUKURAN RITUAL ADAT",
+                isi: "Acara Pesta Syukuran Ritual Adat Desa Lambusango Tuturangi & Bongka'ano Khopo merupakan kegiatan tradisional yang menampilkan berbagai ritual adat dan upacara syukuran. Acara ini dihadiri oleh masyarakat yang mengenakan pakaian adat dan dilaksanakan dengan penuh khidmat. Kegiatan ini bertujuan untuk melestarikan budaya leluhur dan mempererat tali persaudaraan antar warga.",
+                gambar: "https://z-cdn-media.chatglm.cn/files/fce356e7-42ee-48a3-ac84-4908d4588c80_Hadiri_Pesta_Syukuran_Ritual_Adat_Watumotobe%2C_Pj__Bupati_Buton_Harap_Turunan_Pesta_Adat_dapat_Memicu_Geliat_Ekonomi_Warga_12.jpg?auth_key=1792507526-b95fb101b0914566aa8d8eedf1253f4b-0-7261217accb0c8807789d654e8d3246e",
+                kategori: "Budaya",
+                tanggal: "2024-11-9"
+            },
+            {
+                id: 2,
+                judul: "Organisasi Dan Komunitas",
+                isi: "Di desa lambusango terdapat beberapa organisasi dan komunitas, salah satunya organisasi pencinta alam KPA TARSIUS, Organisasi ini bergerak di bidang kornservasi dan lingkungan hidup. kemudian ada juga beberapa komunitas salah satunya KAHAWA COMUNITY komunitasi ini salah satu komunitas penikmat kopi yang berada di desa lambusango namun juga bergerak di bidang sosial kemasyarakatan.",
+                gambar: "https://z-cdn-media.chatglm.cn/files/da7d5853-7c33-41d9-a560-0566d04579ee_WhatsApp%20Image%202025-10-22%20at%2015.34.47_10476279.jpg?auth_key=1792658264-802a7821cd4c4e9b8385d30931c0058b-0-69331fbd9cdc4fecdb8ac778a83f7f57",
+                kategori: "Organisasi",
+                tanggal: "2024-11-10"
+            },
+            {
+                id: 3,
+                judul: "Lomba Badminton KKN UMB 2025",
+                isi: "Lomba badminton yang diselenggarakan dalam rangka KKN UMB 2025 merupakan kolaborasi antara pemerintah desa dengan komunitas TARSIUS. Acara ini akan berlangsung pada tanggal 14-18 Oktober 2025 di aula desa dan diikuti oleh berbagai kelompok umur dari masyarakat sekitar. Lomba ini bertujuan untuk memupuk semangat olahraga dan mempererat hubungan sosial antar warga.",
+                gambar: "https://z-cdn-media.chatglm.cn/files/59a9fb00-4e49-40a3-8c3c-b6bb2eac4f24_WhatsApp%20Image%202025-10-20%20at%2017.04.29_d407cc68.jpg?auth_key=1792487742-516115b6a909487b9e1a3681b1c9c768-0-78c24c628f8713fe09ed35dfee42cf8c",
+                kategori: "Olahraga",
+                tanggal: "2025-10-14"
+            }
+        ];
+
+        const dummyPotensi = [
+            {
+                id: 1,
+                nama: "Pertanian",
+                deskripsi: "Produksi padi, sayuran, dan buah-buahan organik berkualitas tinggi",
+                kategori: "Ekonomi",
+                isImage: true,
+                imageUrl: "https://z-cdn-media.chatglm.cn/files/16138bd8-d59a-47a4-9cbf-68c92b64ea71_WhatsApp%20Image%202025-10-20%20at%2017.54.20_5909fb35.jpg?auth_key=1792490138-d30f54b0166149d88fd3d30c129ccec6-0-91356a70295b767822b98d88c45a847a",
+                keterangan: "Gambar menampilkan pemandangan pertanian di Desa Lambusango dengan sawah yang melambangkan kemakmuran. Pertanian merupakan sektor utama perekonomian desa dengan hasil berkualitas tinggi."
+            },
+            {
+                id: 3,
+                nama: "Bendungan Mataompana",
+                deskripsi: "Bendungan sebagai destinasi wisata alam dan sumber air",
+                kategori: "Pariwisata",
+                isImage: true,
+                imageUrl: "https://z-cdn-media.chatglm.cn/files/4286092a-7bbd-426b-8fcf-75d3681235a2_WhatsApp%20Image%202025-10-22%20at%2015.40.00_110c2c50.jpg?auth_key=1792658665-9a8c50818f1c42c5a769de00852d3bec-0-c8c23900d311e85935f4cf05259b0e69",
+                keterangan: "Bendungan Mataompana juga selain berfungsi sebagai tampungan dan penyuplai air persawahan, juga berfungsi sebagai area wisata. Kejernihan airnya dan kondisi kawasan sekitar yang terlindung membuat kesan nya sebagai permandian alam sangat terasa. Suasana sekitar sangat teduh, airnya bening dan sangat segar."
+            },
+            {
+                id: 4,
+                nama: "Perikanan",
+                deskripsi: "Budidaya mutiara yang berkelanjutan dan ramah lingkungan",
+                kategori: "Ekonomi",
+                isImage: true,
+                imageUrl: "https://z-cdn-media.chatglm.cn/files/61d55386-f82f-4c96-9eed-c07b778aa421_WhatsApp%20Image%202025-10-22%20at%2014.11.34_4e7e71d5.jpg?auth_key=1792649978-46b518c0ac9949b6b7c7b94ae951e773-0-6ccf1cc4f0d1af268fe5c24f5ac209c9",
+                keterangan: "Budidaya mutiara adalah budidaya yang berkelanjutan dan ramah lingkungan dan biasanya berada didaerah terpencil, meningkatkan ekonomi bagi masyarakat yang sulit dijangkau serta menciptakan terumbu karang buatan yang membantu mata pencaharian biota laut lainnya.\n\nPinctada Maxima jenis kerang mutiara yang dibudidayakan di Indonesia dalam pertumbuhan kerangnya membutuhkan fitoplankton sebagai sumber gizi bagi kerang, dimana fitoplankton tumbuh kembang dengan mendapatkan nutrisi tidak hanya di perairan laut sekitar budidaya tetapi juga dari gunung dan sungai sekitarnya. Sehingga ekosistem sekitar perairan lokasi budidaya perlu dijaga dan dilindungi untuk kelangsungan usaha budidaya mutiara laut."
+            },
+            {
+                id: 5,
+                nama: "Air Terjun Alam",
+                deskripsi: "Keindahan air terjun alami dengan air jernih dan suasana hutan yang asri",
+                kategori: "Pariwisata",
+                isImage: true,
+                imageUrl: "https://z-cdn-media.chatglm.cn/files/5b127203-9369-43ca-852f-a17d4043e504_WhatsApp%20Image%202025-10-22%20at%2015.40.01_fe267760.jpg?auth_key=1792658665-17fc828f0f88439cbee2ab9932ce49e1-0-7e66829e787f37fcb4547dd2030d823e",
+                keterangan: "Air terjun ini menawarkan pemandangan alam yang memukau dengan air yang jernih mengalir di atas batu-batu yang ditumbuhi lumut. Dikelilingi oleh hutan lebat dengan sinar matahari yang menembus dedaunan, tempat ini menciptakan suasana yang tenang dan damai, sempurna untuk rekreasi dan relaksasi."
+            }
+        ];
+
+        // Gallery images data
+        const galleryImages = [
+            {
+                id: 1,
+                src: "https://z-cdn-media.chatglm.cn/files/69ec59fe-1118-412c-8bc8-013dbb722b14_2.jpg?auth_key=1792657697-73032b52e2ad4fffabb6b3c69814916c-0-de305881fd81065a9da1276ada1d764e",
+                caption: "Pemandangan indah Desa Lambusango dari udara"
+            },
+            {
+                id: 2,
+                src: "https://z-cdn-media.chatglm.cn/files/fce356e7-42ee-48a3-ac84-4908d4588c80_Hadiri_Pesta_Syukuran_Ritual_Adat_Watumotobe%2C_Pj__Bupati_Buton_Harap_Turunan_Pesta_Adat_dapat_Memicu_Geliat_Ekonomi_Warga_12.jpg?auth_key=1792507526-b95fb101b0914566aa8d8eedf1253f4b-0-7261217accb0c8807789d654e8d3246e",
+                caption: "Pesta Syukuran Ritual Adat Desa Lambusango"
+            },
+            {
+                id: 3,
+                src: "https://z-cdn-media.chatglm.cn/files/16138bd8-d59a-47a4-9cbf-68c92b64ea71_WhatsApp%20Image%202025-10-20%20at%2017.54.20_5909fb35.jpg?auth_key=1792490138-d30f54b0166149d88fd3d30c129ccec6-0-91356a70295b767822b98d88c45a847a",
+                caption: "Pertanian di Desa Lambusango"
+            },
+            {
+                id: 4,
+                src: "https://z-cdn-media.chatglm.cn/files/4286092a-7bbd-426b-8fcf-75d3681235a2_WhatsApp%20Image%202025-10-22%20at%2015.40.00_110c2c50.jpg?auth_key=1792658665-9a8c50818f1c42c5a769de00852d3bec-0-c8c23900d311e85935f4cf05259b0e69",
+                caption: "Bendungan Mataompana"
+            },
+            {
+                id: 5,
+                src: "https://z-cdn-media.chatglm.cn/files/61d55386-f82f-4c96-9eed-c07b778aa421_WhatsApp%20Image%202025-10-22%20at%2014.11.34_4e7e71d5.jpg?auth_key=1792649978-46b518c0ac9949b6b7c7b94ae951e773-0-6ccf1cc4f0d1af268fe5c24f5ac209c9",
+                caption: "Budidaya Perikanan di Desa Lambusango"
+            },
+            {
+                id: 6,
+                src: "https://z-cdn-media.chatglm.cn/files/5b127203-9369-43ca-852f-a17d4043e504_WhatsApp%20Image%202025-10-22%20at%2015.40.01_fe267760.jpg?auth_key=1792658665-17fc828f0f88439cbee2ab9932ce49e1-0-7e66829e787f37fcb4547dd2030d823e",
+                caption: "Air Terjun Alam di Desa Lambusango"
+            },
+            {
+                id: 7,
+                src: "https://z-cdn-media.chatglm.cn/files/da7d5853-7c33-41d9-a560-0566d04579ee_WhatsApp%20Image%202025-10-22%20at%2015.34.47_10476279.jpg?auth_key=1792658264-802a7821cd4c4e9b8385d30931c0058b-0-69331fbd9cdc4fecdb8ac778a83f7f57",
+                caption: "Kegiatan Organisasi dan Komunitas di Desa Lambusango"
+            },
+            // Foto-foto baru yang ditambahkan
+            {
+                id: 8,
+                src: "https://z-cdn-media.chatglm.cn/files/20b0e9c3-8ad2-4804-b456-a52f18321bac_WhatsApp%20Image%202025-10-22%20at%2015.39.56_03c80e49.jpg?auth_key=1792738913-f37ff04bc7674eabb6eb29a9527f15e7-0-d955f647e92bf484b0c78cc0d8661bd5",
+                caption: "Acara tradisional dengan masyarakat berkumpul dan berbagi makanan"
+            },
+            {
+                id: 9,
+                src: "https://z-cdn-media.chatglm.cn/files/efbc9197-81fe-4508-805e-fd8397fe8248_WhatsApp%20Image%202025-10-22%20at%2015.34.46_27029967.jpg?auth_key=1792738913-a1562f1b7bb743ab9b88b3fefc07af33-0-1e8c63c288a6a39da893d4ff1fcfd4a8",
+                caption: "Kegiatan World Clean Up Day di Desa Lambusango"
+            },
+            {
+                id: 10,
+                src: "https://z-cdn-media.chatglm.cn/files/4a36a41e-e8fa-4085-abd9-30fec09b9cd6_WhatsApp%20Image%202025-10-22%20at%2015.34.41_e7aa9eb1.jpg?auth_key=1792738913-ea036fa342f54465a8f2e21a61709b6c-0-40b41420f2b1b52b0791c91987287dc0",
+                caption: "Kegiatan di aliran sungai dengan vegetasi lebat di sekitarnya"
+            },
+            {
+                id: 11,
+                src: "https://z-cdn-media.chatglm.cn/files/94b7ddd3-4553-41e3-906f-3f72791a4b36_WhatsApp%20Image%202025-10-20%20at%2016.48.52_63bb8a9e.jpg?auth_key=1792749756-0a27aadc8e4748ef8b4eec7becc2fda5-0-7dc03ccf708f6c5c1a0750c10fd7b6ee",
+                caption: "Air terjun kecil di tengah hutan dengan aliran air yang jernih dan bebatuan berlumut"
+            },
+            {
+                id: 12,
+                src: "https://z-cdn-media.chatglm.cn/files/4638e847-750c-4ecc-8cf6-bc83e7bf5d97_1.jpg?auth_key=1792738913-0b8f9015db2141f1aa8f418c342d5d8c-0-9f190722d81b7ad2aa2eb15c6561de3b",
+                caption: "Pemandangan pulau-pulau hijau dari udara di sekitar Desa Lambusango"
+            }
+        ];
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking on a link
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('nav-scrolled');
+            } else {
+                navbar.classList.remove('nav-scrolled');
+            }
+        });
+
+        // Back to top button
+        const backToTopBtn = document.getElementById('back-to-top');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.remove('hidden');
+            } else {
+                backToTopBtn.classList.add('hidden');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Fetch and display profil data
+        async function fetchProfil() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/profil`);
+                const result = await response.json();
+
+                if (result.status === 'success' && result.data) {
+                    const profil = result.data;
+                    displayProfil(profil);
+                } else {
+                    console.log('Using dummy profil data');
+                    displayProfil(dummyProfil);
+                }
+            } catch (error) {
+                console.error('Error fetching profil:', error);
+                console.log('Using dummy profil data due to error');
+                displayProfil(dummyProfil);
+            }
+        }
+
+        function displayProfil(profil) {
+            const profilContainer = document.getElementById('profil-container');
+
+            // Format misi as HTML list
+            const misiItems = profil.misi.split('\n').map(item => {
+                return item.trim().startsWith('•')
+                    ? `<li>${item.trim().substring(1).trim()}</li>`
+                    : `<li>• ${item.trim()}</li>`;
+            }).join('');
+
+            profilContainer.innerHTML = `
+                <div class="profil-card rounded-lg shadow-lg p-8 card-hover fade-in">
+                    <div class="profil-icon">
+                        <i class="fas fa-eye text-4xl text-green-600"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4 text-center">Visi</h3>
+                    <p class="text-gray-600 text-center italic">"${profil.visi}"</p>
+                </div>
+                <div class="profil-card rounded-lg shadow-lg p-8 card-hover fade-in">
+                    <div class="profil-icon">
+                        <i class="fas fa-bullseye text-4xl text-green-600"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4 text-center">Misi</h3>
+                    <ul class="text-gray-600 space-y-2">
+                        ${misiItems}
+                    </ul>
+                </div>
+                <div class="profil-card rounded-lg shadow-lg p-8 card-hover fade-in">
+                    <div class="profil-icon">
+                        <i class="fas fa-history text-4xl text-green-600"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4 text-center">Sejarah</h3>
+                    <p class="text-gray-600">${profil.sejarah}</p>
+                </div>
+            `;
+        }
+
+        // Fetch and display kegiatan data
+        async function fetchKegiatan() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/kegiatan?limit=3`);
+                const result = await response.json();
+
+                if (result.status === 'success' && result.data && result.data.length > 0) {
+                    displayKegiatan(result.data);
+                } else {
+                    console.log('Using dummy kegiatan data');
+                    displayKegiatan(dummyKegiatan);
+                }
+            } catch (error) {
+                console.error('Error fetching kegiatan:', error);
+                console.log('Using dummy kegiatan data due to error');
+                displayKegiatan(dummyKegiatan);
+            }
+        }
+
+        function displayKegiatan(kegiatanList) {
+            const kegiatanContainer = document.getElementById('kegiatan-container');
+
+            kegiatanContainer.innerHTML = kegiatanList.map(kegiatan => {
+                // Format date
+                const date = new Date(kegiatan.tanggal);
+                const formattedDate = date.toLocaleDateString('id-ID', {
+                    day: 'numeric',
+                    month: 'long',
+                    year: 'numeric'
+                });
+
+                return `
+                    <article class="kegiatan-card card-hover fade-in">
+                        <div class="kegiatan-img" data-image="${kegiatan.gambar}" data-caption="${kegiatan.judul}">
+                            <img src="${kegiatan.gambar}" alt="${kegiatan.judul}" onerror="this.src='https://picsum.photos/seed/kegiatan-${kegiatan.id}/400/250.jpg'">
+                            <div class="zoom-indicator">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                            <div class="kegiatan-category">${kegiatan.kategori || 'Kegiatan'}</div>
+                            <div class="kegiatan-overlay">
+                                <p class="text-sm">${kegiatan.isi.substring(0, 80)}...</p>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center text-sm text-gray-500 mb-2">
+                                <i class="far fa-calendar mr-2"></i>
+                                <span>${formattedDate}</span>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-2">${kegiatan.judul}</h3>
+                            <p class="text-gray-600 mb-4">${kegiatan.isi}</p>
+
+                            <div class="mt-4 pt-4 border-t border-gray-100">
+                                <div class="flex items-center text-sm text-gray-500">
+                                    <i class="fas fa-info-circle mr-2 text-green-600"></i>
+                                    <span class="font-medium">Keterangan:</span>
+                                </div>
+                                <p class="text-gray-600 mt-1 text-sm">
+                                    ${getKeteranganKegiatan(kegiatan.kategori || 'Kegiatan')}
+                                </p>
+                            </div>
+                        </div>
+                    </article>
+                `;
+            }).join('');
+
+            // Add click event to kegiatan images
+            document.querySelectorAll('.kegiatan-img').forEach(img => {
+                img.addEventListener('click', function() {
+                    const imageSrc = this.getAttribute('data-image');
+                    const imageCaption = this.getAttribute('data-caption');
+                    openLightbox(imageSrc, imageCaption);
+                });
+            });
+        }
+
+        // Fungsi untuk mendapatkan keterangan berdasarkan kategori kegiatan
+        function getKeteranganKegiatan(kategori) {
+            const keterangan = {
+                'Budaya': 'Kegiatan ini bertujuan untuk melestarikan dan mengembangkan nilai-nilai budaya lokal serta memperkenalkannya kepada masyarakat luas.',
+                'Pembangunan': 'Kegiatan ini merupakan bagian dari program pembangunan infrastruktur desa untuk meningkatkan kualitas hidup masyarakat.',
+                'Pelatihan': 'Kegiatan ini bertujuan untuk meningkatkan kapasitas dan keterampilan masyarakat dalam berbagai bidang.',
+                'Kesehatan': 'Kegiatan ini untuk meningkatkan kesadaran dan akses masyarakat terhadap layanan kesehatan.',
+                'Pendidikan': 'Kegiatan ini mendukung peningkatan kualitas pendidikan dan pengetahuan masyarakat desa.',
+                'Olahraga': 'Kegiatan ini untuk mendorong semangat olahraga dan kesehatan jasmani masyarakat serta mempererat hubungan sosial antar warga.',
+                'Sosial': 'Kegiatan ini bertujuan untuk mempererat hubungan sosial dan kepedulian antar warga masyarakat.',
+                'Organisasi': 'Kegiatan ini menampilkan kegiatan organisasi dan komunitas yang ada di Desa Lambusango, seperti KPA TARSIUS yang fokus pada konservasi alam dan KAHAWA COMMUNITY yang merupakan komunitas penikmat kopi yang juga bergerak di bidang sosial kemasyarakatan.',
+                'Kegiatan': 'Kegiatan ini merupakan inisiatif dari pemerintah desa untuk kemajuan bersama.'
+            };
+
+            return keterangan[kategori] || keterangan['Kegiatan'];
+        }
+
+        // Fetch and display potensi data
+        async function fetchPotensi() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/potensi`);
+                const result = await response.json();
+
+                if (result.status === 'success' && result.data && result.data.length > 0) {
+                    displayPotensi(result.data);
+                } else {
+                    console.log('Using dummy potensi data');
+                    displayPotensi(dummyPotensi);
+                }
+            } catch (error) {
+                console.error('Error fetching potensi:', error);
+                console.log('Using dummy potensi data due to error');
+                displayPotensi(dummyPotensi);
+            }
+        }
+
+        function displayPotensi(potensiList) {
+            const potensiContainer = document.getElementById('potensi-container');
+
+            potensiContainer.innerHTML = potensiList.map(potensi => {
+                // Semua potensi sekarang menggunakan gambar
+                return `
+                    <div class="potensi-card card-hover fade-in">
+                        <div class="potensi-badge">${potensi.kategori || 'Potensi'}</div>
+                        <div class="potensi-img" data-image="${potensi.imageUrl}" data-caption="${potensi.nama}">
+                            <img src="${potensi.imageUrl}" alt="${potensi.nama}" onerror="this.src='https://picsum.photos/seed/potensi-${potensi.id}/400/250.jpg'">
+                            <div class="zoom-indicator">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-lg font-semibold mb-2">${potensi.nama}</h3>
+                            <p class="text-gray-600 text-sm mb-2">${potensi.deskripsi}</p>
+                            ${potensi.keterangan ? `<p class="keterangan-pertanian">${potensi.keterangan}</p>` : ''}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            // Add click event to potensi images
+            document.querySelectorAll('.potensi-img').forEach(img => {
+                img.addEventListener('click', function() {
+                    const imageSrc = this.getAttribute('data-image');
+                    const imageCaption = this.getAttribute('data-caption');
+                    openLightbox(imageSrc, imageCaption);
+                });
+            });
+        }
+
+        // Display gallery images
+        function displayGallery() {
+            const galleryContainer = document.getElementById('gallery-container');
+
+            galleryContainer.innerHTML = galleryImages.map(image => `
+                <div class="gallery-item fade-in" data-image="${image.src}" data-caption="${image.caption}">
+                    <img src="${image.src}" alt="${image.caption}" onerror="this.src='https://picsum.photos/seed/gallery-${image.id}/800/600.jpg'">
+                    <div class="gallery-overlay">
+                        <p class="text-sm">${image.caption}</p>
+                    </div>
+                    <div class="gallery-zoom">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+            `).join('');
+
+            // Add click event to gallery items
+            document.querySelectorAll('.gallery-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    const imageSrc = this.getAttribute('data-image');
+                    const imageCaption = this.getAttribute('data-caption');
+
+                    // Check if the image failed to load
+                    const img = this.querySelector('img');
+                    const actualSrc = img.src;
+
+                    openLightbox(actualSrc, imageCaption);
+                });
+            });
+        }
+
+        // Lightbox functionality
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxCaption = document.getElementById('lightbox-caption');
+        const lightboxClose = document.querySelector('.lightbox-close');
+
+        function openLightbox(imageSrc, caption) {
+            lightboxImg.src = imageSrc;
+            if (caption) {
+                lightboxCaption.textContent = caption;
+                lightboxCaption.style.display = 'block';
+            } else {
+                lightboxCaption.textContent = '';
+                lightboxCaption.style.display = 'none';
+            }
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling when lightbox is open
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = 'auto'; // Re-enable scrolling
+        }
+
+        lightboxClose.addEventListener('click', closeLightbox);
+
+        // Close lightbox when clicking outside the image
+        lightbox.addEventListener('click', function(e) {
+            if (e.target === lightbox) {
+                closeLightbox();
+            }
+        });
+
+        // Close lightbox dengan Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                closeLightbox();
+            }
+        });
+
+        // Add click event to about image
+        document.getElementById('about-image-container').addEventListener('click', function() {
+            const img = this.querySelector('img');
+            openLightbox(img.src, 'Kantor Kepala Desa Lambusango');
+        });
+
+        // Moment of KKN photos - lightbox (tanpa keterangan)
+        document.querySelectorAll('.moment-photo').forEach(function(item) {
+            item.addEventListener('click', function() {
+                const img = this.querySelector('img');
+                openLightbox(img.src);
+            });
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in elements
+        document.querySelectorAll('.fade-in').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Fetch data when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchProfil();
+            fetchKegiatan();
+            fetchPotensi();
+            displayGallery();
+        });
+    </script>
+</body>
+</html>
