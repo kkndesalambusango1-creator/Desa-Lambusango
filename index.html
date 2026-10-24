@@ -1724,19 +1724,21 @@
         const dummyKegiatan = [
             {
                 id: 1,
-                judul: "PESTA SYUKURAN RITUAL ADAT",
-                isi: "Acara Pesta Syukuran Ritual Adat Desa Lambusango Tuturangi & Bongka'ano Khopo merupakan kegiatan tradisional yang menampilkan berbagai ritual adat dan upacara syukuran. Acara ini dihadiri oleh masyarakat yang mengenakan pakaian adat dan dilaksanakan dengan penuh khidmat. Kegiatan ini bertujuan untuk melestarikan budaya leluhur dan mempererat tali persaudaraan antar warga.",
-                gambar: "https://z-cdn-media.chatglm.cn/files/fce356e7-42ee-48a3-ac84-4908d4588c80_Hadiri_Pesta_Syukuran_Ritual_Adat_Watumotobe%2C_Pj__Bupati_Buton_Harap_Turunan_Pesta_Adat_dapat_Memicu_Geliat_Ekonomi_Warga_12.jpg?auth_key=1792507526-b95fb101b0914566aa8d8eedf1253f4b-0-7261217accb0c8807789d654e8d3246e",
-                kategori: "Budaya",
-                tanggal: "2024-11-9"
+                judul: "Kegiatan Bersama Anak-anak dan Ibu Majelis Taklim",
+                isi: "Kegiatan bersama anak-anak dan ibu majelis taklim merupakan kegiatan keagamaan rutin yang dilaksanakan di masjid desa. Dalam kegiatan ini, anak-anak dan ibu-ibu majelis taklim berkumpul bersama untuk mengikuti kegiatan belajar serta silaturahmi dalam suasana yang hangat dan penuh keceriaan. Antusiasme anak-anak terlihat dari semangat mereka mengikuti kegiatan dari awal hingga akhir. Kegiatan ini bertujuan untuk mempererat silaturahmi, menumbuhkan semangat belajar anak-anak, serta memperkuat peran majelis taklim sebagai wadah kegiatan keagamaan masyarakat desa.",
+                gambar: "https://z-cdn-media.chatglm.cn/files/9a1ffbda-8bce-4f43-b90b-97df8162bbb7.jpeg?auth_key=1892854063-3cfffae806864981acf5dae6659e8442-0-e361354a53dd4dbb8838ab6717cee489",
+                posisi: "65%",
+                kategori: "Sosial",
+                tanggal: "2026-10-20"
             },
             {
                 id: 2,
-                judul: "Organisasi Dan Komunitas",
-                isi: "Di desa lambusango terdapat beberapa organisasi dan komunitas, salah satunya organisasi pencinta alam KPA TARSIUS, Organisasi ini bergerak di bidang kornservasi dan lingkungan hidup. kemudian ada juga beberapa komunitas salah satunya KAHAWA COMUNITY komunitasi ini salah satu komunitas penikmat kopi yang berada di desa lambusango namun juga bergerak di bidang sosial kemasyarakatan.",
-                gambar: "https://z-cdn-media.chatglm.cn/files/da7d5853-7c33-41d9-a560-0566d04579ee_WhatsApp%20Image%202025-10-22%20at%2015.34.47_10476279.jpg?auth_key=1792658264-802a7821cd4c4e9b8385d30931c0058b-0-69331fbd9cdc4fecdb8ac778a83f7f57",
-                kategori: "Organisasi",
-                tanggal: "2024-11-10"
+                judul: "Kegiatan Olahraga Voli",
+                isi: "Kegiatan olahraga voli merupakan sarana rekreasi dan kebersamaan masyarakat Desa Lambusango yang dilaksanakan di lapangan terbuka desa. Kegiatan ini diikuti oleh warga dari berbagai kalangan usia yang bermain bersama secara santai namun penuh semangat di kedua sisi lapangan. Suasana kegiatan berlangsung akrab dan penuh keceriaan, terlihat dari antusiasme warga yang ikut bermain maupun menyaksikan dari pinggir lapangan. Kegiatan ini bertujuan untuk mendorong semangat olahraga, menjaga kesehatan jasmani, serta mempererat hubungan sosial antar warga desa.",
+                gambar: "https://z-cdn-media.chatglm.cn/files/6033d2e9-ae5f-441f-9f44-0a716f68a0a6.jpeg?auth_key=1892855143-dec6e86baf4b401d8491cabb6f86c35b-0-e8a606033c910afef54bedba0c650e64",
+                posisi: "60%",
+                kategori: "Olahraga",
+                tanggal: "2026-10-21"
             },
             {
                 id: 3,
@@ -1962,7 +1964,7 @@
                 return `
                     <article class="kegiatan-card card-hover fade-in">
                         <div class="kegiatan-img" data-image="${kegiatan.gambar}" data-caption="${kegiatan.judul}">
-                            <img src="${kegiatan.gambar}" alt="${kegiatan.judul}" onerror="this.src='https://picsum.photos/seed/kegiatan-${kegiatan.id}/400/250.jpg'">
+                            <img src="${kegiatan.gambar}" alt="${kegiatan.judul}" ${kegiatan.posisi ? `style="object-position: center ${kegiatan.posisi};"` : ''} onerror="this.src='https://picsum.photos/seed/kegiatan-${kegiatan.id}/400/250.jpg'">
                             <div class="zoom-indicator">
                                 <i class="fas fa-search-plus"></i>
                             </div>
